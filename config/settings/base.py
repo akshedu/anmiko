@@ -34,6 +34,10 @@ if READ_DOT_ENV_FILE:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DJANGO_DEBUG', False)
 
+# Modified user model
+
+AUTH_USER_MODEL = 'core.User'
+
 # Application definition
 
 DJANGO_APPS = (
