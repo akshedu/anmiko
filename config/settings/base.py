@@ -188,7 +188,7 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-REST_AUTH_REGISTER_SERIALIZERS = {
+REST_AUTH_SERIALIZERS = {
         'REGISTER_SERIALIZER': 'src.core.serializers.MyRegisterSerializer',
 }
 
