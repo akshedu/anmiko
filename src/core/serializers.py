@@ -1,4 +1,4 @@
-from .models import User
+from django.contrib.auth import get_user_model
 
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
@@ -6,6 +6,8 @@ from rest_auth.registration.serializers import RegisterSerializer
 
 from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
+
+User = get_user_model()
 
 class UserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
