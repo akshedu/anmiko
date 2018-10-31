@@ -1,7 +1,11 @@
 from .models import User
+
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from rest_auth.registration.serializers import RegisterSerializer
+
+from allauth.account.adapter import get_adapter
+from allauth.account.utils import setup_user_email
 
 class UserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
@@ -19,6 +23,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'email', 'password', 'first_name', 'last_name')
 
+
 class MyRegisterSerializer(RegisterSerializer):
     first_name = serializers.CharField(required=True)
     last_name = serializers.CharField(required=True)
@@ -30,3 +35,12 @@ class MyRegisterSerializer(RegisterSerializer):
             'password1': self.validated_data.get('password1', ''),
             'email': self.validated_data.get('email', ''),
         }
+
+    def save(self, request):
+        adapter = get_adapter()
+        user = adapter.new_user(request)
+        self.cleaned_data = self.get_cleaned_data()
+        adapter.save_user(request, user, self)
+        setup_user_email(request, user, [])
+        user.save()
+        return user
