@@ -9,3 +9,15 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'akshedu'
 EMAIL_HOST_PASSWORD = env('GMAIL_APP_PASSWORD')
+
+# Change CORS settings as needed
+
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = (
+
+)
+
+CORS_ORIGIN_REGEX_WHITELIST = (
+    r'^(https?://)?localhost',
+    r'^(https?://)?127.',
+)

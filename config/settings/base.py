@@ -52,12 +52,17 @@ DJANGO_APPS = (
 
 THIRD_PARTY_APPS = (
     'rest_framework',
+    'rest_framework.authtoken',
+
     'rest_auth',
+    'rest_auth.registration',
+
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'rest_framework.authtoken',
+    
+    'corsheaders'
 )
 
 LOCAL_APPS = (
@@ -76,6 +81,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -182,5 +188,7 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 REST_AUTH_REGISTER_SERIALIZERS = {
-        'REGISTER_SERIALIZER': 'src.rest_auth_serializers.MyRegisterSerializer',
+        'REGISTER_SERIALIZER': 'src.core.serializers.MyRegisterSerializer',
 }
+
+ACCOUNT_ADAPTER = 'src.core.adapter.MyAccountAdapter'
